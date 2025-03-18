@@ -1,0 +1,21 @@
+version: '3.8'  # Versión de Docker Compose
+
+services:  # Definición de servicios
+  app:  # Servicio de la aplicación
+    build: .  # Construye la imagen usando el Dockerfile en el directorio actual
+    depends_on:  # Define dependencias de servicios
+      - mysql  # La aplicación depende del servicio MySQL
+    links:  # Enlaza el servicio MySQL para que la aplicación pueda comunicarse con él
+      - mysql
+    ports:  # Mapea los puertos del host a los puertos del contenedor
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT  # Variables de entorno para los puertos de la aplicación
+
+  mysql:  # Servicio de la base de datos MySQL
+    restart: always  # Reinicia el contenedor automáticamente en caso de fallo
+    image: mysql  # Usa la imagen oficial de MySQL
+    env_file: ./.env  # Archivo de entorno que contiene las variables de entorno
+    environment:  # Variables de entorno para configurar MySQL
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD  # Contraseña del usuario root de MySQL
+      - MYSQL_DATABASE=$MYSQL_DATABASE  # Nombre de la base de datos a crear
+    ports:  # Mapea los puertos del host a los puertos del contenedor
+      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT  # Variables de entorno para los puertos de MySQL

@@ -1,0 +1,86 @@
+
+COMANDOS:
+docker-compose down (para eliminar los contenedores)
+docker-compose up --build (para crear lo inmdicado en docker compose)
+
+docker exec -it docker-study-mysql-1 mysql -u root -p  (para conectarme al contenedor mysql de docker)
+
+Me pedira 
+  Enter password: 123dev.
+
+Para ver lista de DB:
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| tienda_dev         |
++--------------------+
+
+Para seleccionar la tabla:
+mysql>USE tienda_dev;
+
+Para listar las tablas:
+mysql> SHOW TABLES;
++----------------------+
+| Tables_in_tienda_dev |
++----------------------+
+| fabricante           |
++----------------------+
+1 row in set (0.01 sec)
+
+mysql> DESCRIBE fabricante;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| nombre | varchar(45) | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM fabricante;
++----+------------+
+| id | nombre     |
++----+------------+
+|  1 | Bago       |
+|  2 | Roomers    |
+|  3 | Astrzeneca |
+|  4 | Montpelier |
+|  5 | Casasco    |
+|  6 | Cassara    |
+|  7 | Bristol    |
+|  8 | Nova       |
+|  9 | Bayer      |
+| 10 | Pfizer     |
++----+------------+
+10 rows in set (0.00 sec)
+
+
+CREAR MANUALMENTE LA BASE Y TABLA E INFO
+
+Creo la base tienda_dev: 
+  mysql> USE tienda_dev;
+
+Creo la tabla: 
+  mysql> CREATE TABLE fabricante (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(45) DEFAULT NULL,
+	PRIMARY KEY (id)
+);
+
+creo los datos de la tabla:
+   mysql> INSERT INTO fabricante ( id, nombre) 
+   VALUES 
+   (1,'Bago'),
+   (2,'Roomers'),
+   (3,'Astrzeneca'),
+   (4,'Montpelier'),
+   (5,'Casasco'),
+   (6,'Cassara'),
+   (7,'Bristol'),
+   (8,'Nova'),
+   (9,'Bayer'),
+   (10,'Pfizer');

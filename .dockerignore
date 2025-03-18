@@ -1,0 +1,2 @@
+# Ignora el directorio node_modules para no copiarlo al contenedor
+node_modules 
