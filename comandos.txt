@@ -1,27 +1,46 @@
 
 COMANDOS:
-docker-compose down (para eliminar los contenedores)
-docker-compose up --build (para crear lo inmdicado en docker compose)
 
-docker exec -it docker-study-mysql-1 mysql -u root -p  (para conectarme al contenedor mysql de docker)
+docker ps // verifico los contenedores que estan en ejecucion
+
+CON VARIABLES DE ENTORNO:
+
+Entorno dev:
+docker-compose --env-file .env.development up --build // ejecuta el entorno development
+docker exec -it 472bffea07fd65b567adb822acc1254cb28958a23de2eb235ab56c93745ef82a  mysql -u root -p // me conecto a al base developer
+docker-compose --env-file .env.development stop  // detener el entorno  si quiero trabajar con los otros.
+
+Entorno test:
+docker-compose --env-file .env.test up --build
+docker exec -it ID  mysql -u root -p
+docker-compose --env-file .env.test stop
+
+Entorno production:
+docker-compose --env-file .env.production up --build
+
+docker-compose --env-file .env.production stop
+
+
+
+CREAR BASES , TABLAS Y DATOS EN BASE:
 
 Me pedira 
-  Enter password: 123dev.
+  Enter password: devpassword
 
-Para ver lista de DB:
+Para ver lista de DB dev:
 mysql> SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+
 | information_schema |
+| mydb_dev           |
 | mysql              |
 | performance_schema |
 | sys                |
-| tienda_dev         |
 +--------------------+
 
 Para seleccionar la tabla:
-mysql>USE tienda_dev;
+mysql>USE mydb_dev;
 
 Para listar las tablas:
 mysql> SHOW TABLES;
@@ -64,7 +83,7 @@ CREAR MANUALMENTE LA BASE Y TABLA E INFO
 Creo la base tienda_dev: 
   mysql> USE tienda_dev;
 
-Creo la tabla: 
+Creo la tabla dev: 
   mysql> CREATE TABLE fabricante (
 	id INT(11) NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(45) DEFAULT NULL,
@@ -74,8 +93,8 @@ Creo la tabla:
 creo los datos de la tabla:
    mysql> INSERT INTO fabricante ( id, nombre) 
    VALUES 
-   (1,'Bago'),
-   (2,'Roomers'),
+   (1,'Bago_prod'),
+   (2,'Roomers_prod'),
    (3,'Astrzeneca'),
    (4,'Montpelier'),
    (5,'Casasco'),

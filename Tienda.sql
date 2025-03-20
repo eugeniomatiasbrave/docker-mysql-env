@@ -1,8 +1,8 @@
 -- Crea la base de datos si no existe
-CREATE DATABASE IF NOT EXISTS tienda_dev;
+CREATE DATABASE IF NOT EXISTS mydb_dev;  -- o mydb_prod o mydb_test
 
--- Selecciona la base de datos tienda_dev
-USE tienda_dev;
+-- Selecciona la base de datos tienda
+USE mydb_dev;  -- o mydb_prod o mydb_test
 
 -- Crea la tabla fabricante con las columnas id y nombre
 CREATE TABLE fabricante (

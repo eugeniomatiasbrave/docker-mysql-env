@@ -1,3 +1,4 @@
 Comando de dockerHub para ontener la app:
 
+docker build -t euge777/app-docker-mysql-env:tagname .
 docker push euge777/app-docker-mysql-env:tagname

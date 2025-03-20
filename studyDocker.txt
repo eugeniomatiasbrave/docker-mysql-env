@@ -1,0 +1,42 @@
+
+DOCKER CON VARIABLES DE ENTORNO:
+
+  1. Una Imagen Base Única en Dockerfile
+
+  2. Distintos Contenedores con docker-compose.yml
+
+  3. Una base de datos distinta para cada entorno (recomendado).
+   Usar diferentes base de datos en contenedores para desarrollo, prueba y producción.
+
+   Definir variables distintas para cada entorno: 
+   Archivo .env.dev:
+   Archivo .env.prod:
+   Archivo .env.test:
+
+4. Puertos sugeridos según entornos
+   Entorno	   Contenedor app (Node.js)	Contenedor db (MySQL)
+   Desarrollo	3000:3000	               3307:3306
+   Test	      3001:3000	               3308:3306
+   Producción	80:3000	                  3309:3306
+
+Collecting workspace informationLa estrategia que has descrito para trabajar con Docker es sólida y sigue buenas prácticas. Aquí hay una verificación de cada punto:
+
+1. **Una Imagen Base Única en Dockerfile**:
+   - Tener una única imagen base en el Dockerfile es una buena práctica. Esto asegura que todos los entornos (desarrollo, prueba, producción) usen la misma configuración base, lo que reduce inconsistencias.
+
+2. **Distintos Contenedores con docker-compose.yml**:
+   - Usar docker-compose.yml para definir y gestionar múltiples contenedores es una excelente manera de orquestar tu aplicación y sus dependencias (como la base de datos).
+
+3. **Una base de datos distinta para cada entorno (recomendado)**:
+   - Usar diferentes bases de datos para desarrollo, prueba y producción es crucial para evitar conflictos y asegurar que los datos de producción no se vean comprometidos.
+
+   - **Definir variables distintas para cada entorno**:
+     - Definir variables de entorno en archivos `.env` separados (`.env.dev`, .env.prod, .env.test) es una práctica recomendada para gestionar configuraciones específicas de cada entorno.
+
+4. **Puertos sugeridos según entornos**:
+   - Asignar diferentes puertos para cada entorno ayuda a evitar conflictos y facilita la identificación del entorno en el que se está trabajando. Los puertos sugeridos son apropiados:
+     - Desarrollo: `3000:3000` para la app y `3307:3306` para la base de datos.
+     - Test: `3001:3000` para la app y `3308:3306` para la base de datos.
+     - Producción: `80:3000` para la app y `3309:3306` para la base de datos.
+
+En resumen, tu estrategia está bien estructurada y sigue buenas prácticas para el desarrollo y despliegue de aplicaciones con Docker.
